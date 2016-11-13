@@ -17,7 +17,7 @@ let plugin:IPmpPlugin = {
         - inject main stylesheet (sennaJS version)
         - inject main JS script (sennaJS version)
         - page layout html helpers
-        - portlet skin HTML helpers
+        - portlet skin HTML helper
     `,
     ruleHelperObjectName: 'lfr7',
     ruleHelpers: ruleHelpers,
