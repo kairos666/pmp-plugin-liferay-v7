@@ -1,12 +1,9 @@
 {
   "name": "pmp-plugin-liferay-v7",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Pimp My Page plugin - contains liferay 7 helpers",
   "main": "js/index.js",
   "typings": "js/index",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kairos666/pmp-plugin-liferay-v7.git"
@@ -16,7 +13,7 @@
     "liferay",
     "pmp"
   ],
-  "author": "Kairos666",
+  "author": "David Maggi <musashi.miyamoto81@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/kairos666/pmp-plugin-liferay-v7/issues"
