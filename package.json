@@ -32,5 +32,19 @@
     "gulp-typescript": "^3.1.2",
     "merge2": "^1.0.2",
     "typescript": "^2.0.9"
+  },
+  "documentation": {
+    "jsHelpers":[
+      "helpers.lfr7.killAUI()",
+      "helpers.lfr7.AUIRemoveUse(moduleName, removePattern)",
+      "helpers.lfr7.injectExistingPortlet()"
+    ],
+    "htmlHelpers":[
+      "<portlet content-title=\"string\" application-decorators=\"skinName\"></portlet>",
+      "<lfr-layout-container add-classes=\"string\"></lfr-layout-container>",
+      "<lfr-row></lfr-row>",
+      "<lfr-column add-classes=\"string\"></lfr-column>",
+      "<re-inject-portlet data-fake-id=\"boolean\" data-portlet-id=\"targetPortleId\"></re-inject-portlet>"
+    ]
   }
 }
