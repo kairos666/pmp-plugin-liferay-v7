@@ -27,8 +27,34 @@ var AUIRemoveUse = function (moduleName, removePattern) {
         }
     });
 };
+var injectExistingPortlet = function () {
+    if (!$)
+        throw new Error(noInitError);
+    var injectPlaceholderList = $('.re-inject-portlet[data-portlet-id]');
+    injectPlaceholderList.each(function (i) {
+        var injectPlaceholder = $('.re-inject-portlet[data-portlet-id]').eq(i);
+        var portletID = injectPlaceholder.attr('data-portlet-id');
+        if (portletID && $('#' + portletID).length !== 0) {
+            var originalPortlet = $('#' + portletID);
+            var oldID = originalPortlet.find('.portlet').attr('id');
+            originalPortlet.find('.portlet').attr('id', oldID + '_fakePortletID');
+            var attributes = originalPortlet[0].attribs;
+            var wrappingDiv = '<div ';
+            for (var attribute in attributes) {
+                var idFaking = void 0;
+                (attribute === 'id' && attributes["data-fake-id"] === 'true') ? idFaking = '_fakePortletID' : '';
+                wrappingDiv += attribute + '="' + attributes[attribute] + idFaking + '" ';
+            }
+            ;
+            var content = wrappingDiv + ' >' + $('#' + portletID).html() + '</div>';
+            injectPlaceholder.addClass('processed').after(content);
+        }
+    });
+    $('.re-inject-portlet.processed').remove();
+};
 module.exports = {
     init: init,
     killAUI: killAUI,
-    AUIRemoveUse: AUIRemoveUse
+    AUIRemoveUse: AUIRemoveUse,
+    injectExistingPortlet: injectExistingPortlet
 };

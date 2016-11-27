@@ -55,8 +55,43 @@ let AUIRemoveUse = function(moduleName:string, removePattern:string):void {
     });
 }
 
+/**
+ * move around existing portlet to some other location
+ */
+let injectExistingPortlet = ():void => {
+    if(!$) throw new Error(noInitError);
+
+    let injectPlaceholderList       = $('.re-inject-portlet[data-portlet-id]');
+    injectPlaceholderList.each(function(i){
+        //iterate throught placeholders
+        let injectPlaceholder       = $('.re-inject-portlet[data-portlet-id]').eq(i);
+        let portletID               = injectPlaceholder.attr('data-portlet-id');
+
+        if(portletID && $('#'+ portletID).length !== 0) {
+            let originalPortlet     = $('#'+ portletID);
+            
+            //customize ID
+            var oldID = originalPortlet.find('.portlet').attr('id');
+            originalPortlet.find('.portlet').attr('id', oldID + '_fakePortletID');
+            
+            //recreate wrapper tag (customize ID)
+            var attributes        = originalPortlet[0].attribs;
+            var wrappingDiv       = '<div ';
+            for(let attribute in attributes) {
+                let idFaking;
+                (attribute === 'id' && attributes["data-fake-id"] === 'true') ? idFaking = '_fakePortletID' : '';
+                wrappingDiv += attribute + '="' + attributes[attribute] + idFaking + '" ';
+            };
+            let content = wrappingDiv + ' >' + $('#'+ portletID).html() + '</div>';
+            injectPlaceholder.addClass('processed').after(content);
+        }
+    });
+    $('.re-inject-portlet.processed').remove();
+}
+
 module.exports = {
     init: init,
     killAUI: killAUI,
-    AUIRemoveUse: AUIRemoveUse
+    AUIRemoveUse: AUIRemoveUse,
+    injectExistingPortlet: injectExistingPortlet
 }
