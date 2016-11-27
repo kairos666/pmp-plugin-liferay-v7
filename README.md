@@ -47,7 +47,7 @@ Depending on the configuration of rows and columns provided, the layout will aut
 ```
 
 ### re-inject-portlet
-relocate a portlet into the page. This helper tag is useful for targeting a portlet by ID a move it to the tag position.  
+relocate a portlet into the page. This helper tag is useful for targeting a portlet by ID and move it to the tag position.  
 ```html
 <!-- default | will provide a fake title and default skin type (decorate)-->
 <portlet>...insert HTML content here...</portlet>
